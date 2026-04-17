@@ -523,6 +523,91 @@ async function generatePDF(html, outputPath) {
 }
 
 // ---------------------------------------------------------------------------
+// Embedding Factur-X : XML CII dans le PDF + metadonnees XMP (PDF/A-3B)
+// ---------------------------------------------------------------------------
+
+async function embedFacturX(pdfPath, xml, invoice, company) {
+  let pdfLib;
+  try {
+    pdfLib = require('pdf-lib');
+  } catch {
+    console.error('Erreur : pdf-lib non installe. Lancez : npm install');
+    return false;
+  }
+  const { PDFDocument, PDFName, PDFString, PDFHexString, AFRelationship } = pdfLib;
+
+  const pdfBytes = fs.readFileSync(pdfPath);
+  const pdfDoc = await PDFDocument.load(pdfBytes);
+
+  // Metadonnees PDF classiques (Title/Author/Producer)
+  pdfDoc.setTitle(`Facture ${invoice.number}`);
+  pdfDoc.setAuthor(company.name || '');
+  pdfDoc.setProducer('Paperasse generate-facturx');
+  pdfDoc.setCreator('Paperasse');
+  const issueDate = invoice.date ? new Date(invoice.date + 'T00:00:00Z') : new Date();
+  pdfDoc.setCreationDate(issueDate);
+  pdfDoc.setModificationDate(issueDate);
+
+  // Embarquer factur-x.xml comme piece jointe avec AFRelationship="Alternative"
+  // (profil Factur-X EN16931). Le nom de fichier DOIT etre "factur-x.xml" (lowercase).
+  await pdfDoc.attach(Buffer.from(xml, 'utf8'), 'factur-x.xml', {
+    mimeType: 'application/xml',
+    description: 'Factur-X EN16931 CII XML representation',
+    creationDate: issueDate,
+    modificationDate: issueDate,
+    afRelationship: AFRelationship.Alternative,
+  });
+
+  // Metadonnees XMP declarant PDF/A-3B + profil Factur-X
+  const xmpMetadata = buildXmpMetadata(invoice, company, issueDate);
+  const metadataStream = pdfDoc.context.stream(xmpMetadata, {
+    Type: PDFName.of('Metadata'),
+    Subtype: PDFName.of('XML'),
+    Length: xmpMetadata.length,
+  });
+  const metadataRef = pdfDoc.context.register(metadataStream);
+  pdfDoc.catalog.set(PDFName.of('Metadata'), metadataRef);
+
+  // Marquer le document comme PDF/A : Catalog /Lang + MarkInfo (basique)
+  pdfDoc.catalog.set(PDFName.of('Lang'), PDFString.of('fr-FR'));
+
+  const out = await pdfDoc.save({ useObjectStreams: false });
+  fs.writeFileSync(pdfPath, out);
+  return true;
+}
+
+function buildXmpMetadata(invoice, company, issueDate) {
+  const iso = issueDate.toISOString();
+  const escape = (s) => String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  return `<?xpacket begin="\uFEFF" id="W5M0MpCehiHzreSzNTczkc9d"?>
+<x:xmpmeta xmlns:x="adobe:ns:meta/">
+  <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+    <rdf:Description rdf:about=""
+      xmlns:pdfaid="http://www.aiim.org/pdfa/ns/id/"
+      xmlns:dc="http://purl.org/dc/elements/1.1/"
+      xmlns:xmp="http://ns.adobe.com/xap/1.0/"
+      xmlns:pdf="http://ns.adobe.com/pdf/1.3/"
+      xmlns:fx="urn:factur-x:pdfa:CrossIndustryDocument:invoice:1p0#">
+      <pdfaid:part>3</pdfaid:part>
+      <pdfaid:conformance>B</pdfaid:conformance>
+      <dc:title><rdf:Alt><rdf:li xml:lang="x-default">Facture ${escape(invoice.number)}</rdf:li></rdf:Alt></dc:title>
+      <dc:creator><rdf:Seq><rdf:li>${escape(company.name)}</rdf:li></rdf:Seq></dc:creator>
+      <dc:description><rdf:Alt><rdf:li xml:lang="x-default">Factur-X EN16931 - ${escape(invoice.number)}</rdf:li></rdf:Alt></dc:description>
+      <xmp:CreateDate>${iso}</xmp:CreateDate>
+      <xmp:ModifyDate>${iso}</xmp:ModifyDate>
+      <xmp:CreatorTool>Paperasse</xmp:CreatorTool>
+      <pdf:Producer>Paperasse generate-facturx</pdf:Producer>
+      <fx:DocumentType>INVOICE</fx:DocumentType>
+      <fx:DocumentFileName>factur-x.xml</fx:DocumentFileName>
+      <fx:Version>1.0</fx:Version>
+      <fx:ConformanceLevel>EN 16931</fx:ConformanceLevel>
+    </rdf:Description>
+  </rdf:RDF>
+</x:xmpmeta>
+<?xpacket end="w"?>`;
+}
+
+// ---------------------------------------------------------------------------
 // Main
 // ---------------------------------------------------------------------------
 
@@ -589,9 +674,10 @@ async function main() {
 
   if (pdfOk) {
     console.log(`✅ PDF genere : ${pdfPath}`);
-    console.log(`\n📋 Pour creer le Factur-X final (PDF + XML embarque), utilisez :`);
-    console.log(`   npx facturx embed ${pdfPath} ${xmlPath}`);
-    console.log(`   ou la lib node-zugferd / facturx`);
+    const embedded = await embedFacturX(pdfPath, xml, invoice, company);
+    if (embedded) {
+      console.log(`✅ Factur-X embarque : ${pdfPath} (PDF/A-3B, XML CII inclus)`);
+    }
   }
 
   // Resume
