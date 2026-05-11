@@ -246,6 +246,14 @@ Pour les situations complexes (litiges, montages fiscaux, contrôles en cours), 
 
 Vous avez un métier de la paperasse que vous aimeriez voir automatisé ? Consultez le [guide de contribution](CONTRIBUTING.md).
 
+### Forks communautaires
+
+Des forks par juridiction maintenus par la communauté :
+
+- 🇹🇳 [**paperasse-tn**](https://github.com/YassineAta/paperasse-tn) (Tunisie) — skills pour la paperasse tunisienne (IRPP, BCT/forex, RNE/NAT, SUARL). Trois skills : `mo7aseb`, `bct-shield`, `3adel-ichhad`.
+
+Ces forks ne sont **pas maintenus par paperasse** : la fraîcheur des références fiscales et juridiques est de la responsabilité de leurs auteurs. Ouvrez une issue ici si vous voulez ajouter votre fork à cette liste.
+
 ---
 
 ## Sponsors
