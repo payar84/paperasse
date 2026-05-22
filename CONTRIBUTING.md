@@ -29,6 +29,7 @@ Noms de dossiers en français, en minuscules, avec tirets :
 - `auto-entrepreneur` (auto-entrepreneur / micro-entreprise, déclarations URSSAF et CFE) <!-- ajouté pour mon usage perso -->
 - `syndic-benevole` (syndic bénévole / gestion d'une petite copropriété sans cabinet) <!-- ajouté pour mon usage perso -->
 - `association-loi1901` (trésorier / secrétaire d'association loi 1901, déclarations en préfecture et suivi comptable simplifié) <!-- ajouté pour mon usage perso -->
+- `bailleur-particulier` (bailleur particulier / gestion locative en nom propre, déclarations foncières et quittances) <!-- ajouté pour mon usage perso -->
 
 ## Doctrine : skill = métier, pas outil
 
@@ -56,7 +57,5 @@ paperasse/
 │   └── data/formes-juridiques.json -> ../../data/formes-juridiques.json
 └── notaire/
     ├── SKILL.md
-    └── integrations/guichet-unique -> ../../integrations/guichet-unique
+    └── integrations/guichet-unique -> ../../integrations/guichet-u
 ```
-
-**Chevauchement ≠ duplication** : si `notaire` et un futur `avocat` font tous les deux des modifications statutaires, c'est fidèle à la réalité (les deux p
