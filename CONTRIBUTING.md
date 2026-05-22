@@ -30,6 +30,7 @@ Noms de dossiers en français, en minuscules, avec tirets :
 - `syndic-benevole` (syndic bénévole / gestion d'une petite copropriété sans cabinet) <!-- ajouté pour mon usage perso -->
 - `association-loi1901` (trésorier / secrétaire d'association loi 1901, déclarations en préfecture et suivi comptable simplifié) <!-- ajouté pour mon usage perso -->
 - `bailleur-particulier` (bailleur particulier / gestion locative en nom propre, déclarations foncières et quittances) <!-- ajouté pour mon usage perso -->
+- `heritier` (héritier / succession, déclaration de succession, partage entre cohéritiers) <!-- ajouté pour mon usage perso -->
 
 ## Doctrine : skill = métier, pas outil
 
@@ -54,8 +55,5 @@ paperasse/
 ├── comptable/
 │   ├── SKILL.md
 │   ├── integrations/guichet-unique -> ../../integrations/guichet-unique
-│   └── data/formes-juridiques.json -> ../../data/formes-juridiques.json
-└── notaire/
-    ├── SKILL.md
-    └── integrations/guichet-unique -> ../../integrations/guichet-u
+│   └── data/f
 ```
