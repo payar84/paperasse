@@ -26,6 +26,7 @@ Noms de dossiers en français, en minuscules, avec tirets :
 - `expert-immobilier` (expert en évaluation immobilière / transactions)
 - `agent-douane` (agent en douane / formalités import-export)
 - `assistant-juridique` (assistant juridique / rédaction de courriers et actes simples) <!-- ajouté pour mon usage perso -->
+- `auto-entrepreneur` (auto-entrepreneur / micro-entreprise, déclarations URSSAF et CFE) <!-- ajouté pour mon usage perso -->
 
 ## Doctrine : skill = métier, pas outil
 
@@ -62,7 +63,5 @@ paperasse/
 
 ```
 mon-skill/
-├── SKILL.md              # Instructions pour l'agent (obligatoire)
-├── references/           # Textes de loi, barèmes, données de référence
-│   ├── texte
+├── SKILL.md              # I
 ```
