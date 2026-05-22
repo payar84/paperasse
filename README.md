@@ -26,7 +26,7 @@ cd paperasse
 
 # Create and activate a virtual environment
 python -m venv .venv
-source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+source .venv/bin/activate  # On Windows: .venv\.Scripts\activate
 
 # Install dependencies
 pip install -r requirements.txt
@@ -54,6 +54,8 @@ python -m paperasse process path/to/document.pdf --format json
 # Batch process a directory
 python -m paperasse batch path/to/documents/
 ```
+
+> **Personal note:** I mostly use the `--format json` flag and pipe the output into `jq` for quick inspection. If you're doing the same, `jq '.["fields"]'` is a handy starting point.
 
 ## Running Evaluations
 
