@@ -65,10 +65,5 @@ mon-skill/
 │   └── bareme.md
 └── evals/                # Tests automatisés (recommandé)
     ├── evals.json
-    └── files/            # Fichiers de test (company.json, FEC, etc.)
-```
-
-## SKILL.md : frontmatter
-
-```yaml
+    └── files/            # Fichiers d'entrée utilisés par les evals (ex: PDF, CSV)
 ```
