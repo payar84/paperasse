@@ -23,6 +23,7 @@ Noms de dossiers en français, en minuscules, avec tirets :
 - `drh` (DRH / ressources humaines)
 - `juriste-social` (juriste en droit social / conseil aux entreprises)
 - `gestionnaire-paie` (gestionnaire de paie / traitement des bulletins de salaire)
+- `expert-immobilier` (expert en évaluation immobilière / transactions)
 
 ## Doctrine : skill = métier, pas outil
 
@@ -65,5 +66,7 @@ mon-skill/
 │   └── bareme.md
 └── evals/                # Tests automatisés (recommandé)
     ├── evals.json
-    └── files/            # Fichiers d'entrée utilisés par les evals (ex: PDF, CSV)
+    └── files/            # Fichiers d'exemple utilisés par les evals
 ```
+
+> **Note personnelle** : le commentaire du dossier `files/` dans la structure ci-dessus était tronqué dans l'upstream — j'ai complété la description pour plus de clarté.
