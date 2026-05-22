@@ -32,6 +32,7 @@ Noms de dossiers en français, en minuscules, avec tirets :
 - `bailleur-particulier` (bailleur particulier / gestion locative en nom propre, déclarations foncières et quittances) <!-- ajouté pour mon usage perso -->
 - `heritier` (héritier / succession, déclaration de succession, partage entre cohéritiers) <!-- ajouté pour mon usage perso -->
 - `retraite-complementaire` (futur retraité / simulation retraite complémentaire AGIRC-ARRCO, rachat de trimestres) <!-- ajouté pour mon usage perso -->
+- `travaux-maison` (particulier réalisant des travaux / permis de construire, déclaration préalable, TVA réduite, MaPrimeRénov') <!-- ajouté pour mon usage perso -->
 
 ## Doctrine : skill = métier, pas outil
 
@@ -48,9 +49,5 @@ Pour éviter la duplication tout en gardant les skills self-contained, le code p
 ```
 paperasse/
 ├── integrations/
-│   └── guichet-unique/        # client API INPI, soumission formalités
-├── data/
-│   └── formes-juridiques.json # codes INPI partagés
-├── scripts/
-│   └── submit-depot-co
+│   └── guichet-un
 ```
