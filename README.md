@@ -56,6 +56,8 @@ python -m paperasse batch path/to/documents/
 ```
 
 > **Personal note:** I mostly use the `--format json` flag and pipe the output into `jq` for quick inspection. If you're doing the same, `jq '.["fields"]'` is a handy starting point.
+>
+> I also keep a small shell alias for this: `alias pp='python -m paperasse process --format json'`
 
 ## Running Evaluations
 
