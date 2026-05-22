@@ -25,6 +25,7 @@ Noms de dossiers en français, en minuscules, avec tirets :
 - `gestionnaire-paie` (gestionnaire de paie / traitement des bulletins de salaire)
 - `expert-immobilier` (expert en évaluation immobilière / transactions)
 - `agent-douane` (agent en douane / formalités import-export)
+- `assistant-juridique` (assistant juridique / rédaction de courriers et actes simples) <!-- ajouté pour mon usage perso -->
 
 ## Doctrine : skill = métier, pas outil
 
@@ -63,9 +64,5 @@ paperasse/
 mon-skill/
 ├── SKILL.md              # Instructions pour l'agent (obligatoire)
 ├── references/           # Textes de loi, barèmes, données de référence
-│   ├── texte-de-loi.md
-│   └── bareme.md
-└── evals/                # Tests
+│   ├── texte
 ```
-
-> **Note personnelle** : je travaille principalement sur les skills liés à la comptabilité et à la paie. Si vous ouvrez une PR sur `gestionnaire-paie` ou `comptable`, je suis disponible pour review.
