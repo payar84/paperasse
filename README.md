@@ -53,11 +53,16 @@ python -m paperasse process path/to/document.pdf --format json
 
 # Batch process a directory
 python -m paperasse batch path/to/documents/
+
+# Batch process and write results to a file
+python -m paperasse batch path/to/documents/ --output results.json
 ```
 
 > **Personal note:** I mostly use the `--format json` flag and pipe the output into `jq` for quick inspection. If you're doing the same, `jq '.["fields"]'` is a handy starting point.
 >
 > I also keep a small shell alias for this: `alias pp='python -m paperasse process --format json'`
+>
+> For batch runs I tend to add `--output results.json` so I have a file to diff against later — useful when tweaking prompts.
 
 ## Running Evaluations
 
