@@ -27,6 +27,7 @@ Noms de dossiers en français, en minuscules, avec tirets :
 - `agent-douane` (agent en douane / formalités import-export)
 - `assistant-juridique` (assistant juridique / rédaction de courriers et actes simples) <!-- ajouté pour mon usage perso -->
 - `auto-entrepreneur` (auto-entrepreneur / micro-entreprise, déclarations URSSAF et CFE) <!-- ajouté pour mon usage perso -->
+- `syndic-benevole` (syndic bénévole / gestion d'une petite copropriété sans cabinet) <!-- ajouté pour mon usage perso -->
 
 ## Doctrine : skill = métier, pas outil
 
@@ -57,11 +58,4 @@ paperasse/
     └── integrations/guichet-unique -> ../../integrations/guichet-unique
 ```
 
-**Chevauchement ≠ duplication** : si `notaire` et un futur `avocat` font tous les deux des modifications statutaires, c'est fidèle à la réalité (les deux professions le font). La *logique* est partagée via les symlinks, le *framing métier* diffère dans chaque `SKILL.md` (le notaire rédige un acte authentique, l'avocat un acte SSP).
-
-## Structure d'un skill
-
-```
-mon-skill/
-├── SKILL.md              # I
-```
+**Chevauchement ≠ duplication** : si `notaire` et un futur `avocat` font tous les deux des modifications statutaires, c'est fidèle à la réalité (les deux professions le font). La *logique* est partagée via les symlinks, le *framing métier* diffère dans chaque `SKILL.md` (le not
